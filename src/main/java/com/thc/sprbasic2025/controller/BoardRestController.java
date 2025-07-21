@@ -52,7 +52,6 @@ public class BoardRestController {
 
     @GetMapping("/list")
     public ResponseEntity<List<BoardDto.DetailResDto>> list(BoardDto.ListReqDto params){
-
         return ResponseEntity.ok(boardService.list(params));
     }
 
