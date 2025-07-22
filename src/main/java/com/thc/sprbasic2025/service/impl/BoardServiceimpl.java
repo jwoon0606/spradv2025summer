@@ -39,6 +39,13 @@ public class BoardServiceimpl implements BoardService {
 
     @Override
     public DefaultDto.CreateResDto create(BoardDto.CreateReqDto param) {
+        //유저 로그인 안되어 있으면 못쓰게 할꺼야!
+        if(param.getReqUserId() == null){
+            throw new RuntimeException("no userId");
+        } else {
+            param.setUserId(param.getReqUserId());
+        }
+
         DefaultDto.CreateResDto res = boardRepository.save(param.toEntity()).toCreateResDto();
         for(String each : param.getImgs()){
             boardimgService.create(BoardimgDto.CreateReqDto.builder().boardId(res.getId()).url(each).build());
@@ -77,7 +84,9 @@ public class BoardServiceimpl implements BoardService {
                 .build();
         return res;
         */
+        System.out.println("param.getId() : " + param.getId());
         BoardDto.DetailResDto res = boardMapper.detail(param.getId());
+        System.out.println("res : " + res);
         res.setImgs(
             boardimgService.list(BoardimgDto.ListReqDto.builder().deleted(false).boardId(res.getId()).build())
         );
@@ -94,9 +103,11 @@ public class BoardServiceimpl implements BoardService {
     public List<BoardDto.DetailResDto> list(BoardDto.ListReqDto param) {
         return detailList(boardMapper.list(param));
     }
+
     public List<BoardDto.DetailResDto> detailList(List<BoardDto.DetailResDto> list){
         List<BoardDto.DetailResDto> newList = new ArrayList<>();
         for(BoardDto.DetailResDto each : list){
+            System.out.println(each);
             newList.add(detail(DefaultDto.DetailReqDto.builder().id(each.getId()).build()));
         }
         return newList;

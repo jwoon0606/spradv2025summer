@@ -35,6 +35,9 @@ list
         $.ajax({
             url: "/api/board/list",
             method: "GET",
+            headers : {
+                "Authorization" : localStorage.getItem("AccessToken")
+            },
             data:{
                 deleted : deleted
                 , title : $("#search_title").val()

@@ -1,5 +1,6 @@
 package com.thc.sprbasic2025.util;
 
+import com.thc.sprbasic2025.constants.AuthConstants;
 import com.thc.sprbasic2025.domain.RefreshToken;
 import com.thc.sprbasic2025.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class TokenFactory {
     public String generateAccessKey(String refreshKey){
         Long userId = validateRefreshTokenKey(refreshKey);
         if(userId != null){
-            return generateKey(userId, accessTokenDuedateTerm);
+            return AuthConstants.TOKEN_PREFIX + generateKey(userId, accessTokenDuedateTerm);
         }
         return null;
     }
@@ -37,7 +38,7 @@ public class TokenFactory {
         revokeRefreshKey(userId);
         String refreshKey = generateKey(userId, refreshTokenDuedateTerm);
         refreshTokenRepository.save(RefreshToken.of(userId, refreshKey));
-        return refreshKey;
+        return AuthConstants.TOKEN_PREFIX + refreshKey;
     }
     public void revokeRefreshKey(Long userId){
         List<RefreshToken> list = refreshTokenRepository.findByUserId(userId);

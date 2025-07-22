@@ -25,9 +25,8 @@ public class BoardRestController {
 
     @PostMapping("")
     public ResponseEntity<DefaultDto.CreateResDto> create(@RequestBody BoardDto.CreateReqDto params, HttpServletRequest request, HttpServletResponse response){
-        String testing = response.getHeader("testing");
-        System.out.println("testing : " + testing);
-
+        Long reqUserId = (Long) request.getAttribute("reqUserId");
+        params.setReqUserId(reqUserId);
 //        System.out.println("reqTesting1 : " + request.getAttribute("reqTes" +
 //                "ting1"));
 //        System.out.println("resTesting2 : " + response.getHeader("resTesting2"));
@@ -35,7 +34,10 @@ public class BoardRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<Void> update(@RequestBody BoardDto.UpdateReqDto params){
+    public ResponseEntity<Void> update(@RequestBody BoardDto.UpdateReqDto params, HttpServletRequest request){
+        Long reqUserId = (Long) request.getAttribute("reqUserId");
+        params.setReqUserId(reqUserId);
+
         boardService.update(params);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

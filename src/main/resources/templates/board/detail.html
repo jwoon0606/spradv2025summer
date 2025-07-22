@@ -180,6 +180,9 @@ detail
             //url: "/api/board/detail/" + $("#input_order").val(),
             url: "/api/board/detail",
             method: "GET",
+            headers : {
+                "Authorization" : localStorage.getItem("AccessToken")
+            },
             data:{
                 id : $("#input_order").val()
                 , userId : userId
