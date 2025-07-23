@@ -20,16 +20,16 @@ public class DefaultInterceptor implements HandlerInterceptor {
     //컨트롤러 진입 전에 호출되는 메서드
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String accessToken = request.getHeader(AuthConstants.HEADER_STRING);
-        logger.info("preHandle / 1 accessToken [{}]", accessToken);
-
-        Long userId = null;
-        if(accessToken != null && accessToken.startsWith(AuthConstants.TOKEN_PREFIX)){
-            accessToken = accessToken.substring(AuthConstants.TOKEN_PREFIX.length());
-            logger.info("preHandle / 2 accessToken [{}]", accessToken);
-            userId = tokenFactory.validateKey(accessToken);
-        }
-        request.setAttribute("reqUserId", userId);
+//        String accessToken = request.getHeader(AuthConstants.HEADER_STRING);
+//        logger.info("preHandle / 1 accessToken [{}]", accessToken);
+//
+//        Long userId = null;
+//        if(accessToken != null && accessToken.startsWith(AuthConstants.TOKEN_PREFIX)){
+//            accessToken = accessToken.substring(AuthConstants.TOKEN_PREFIX.length());
+//            logger.info("preHandle / 2 accessToken [{}]", accessToken);
+//            userId = tokenFactory.validateKey(accessToken);
+//        }
+//        request.setAttribute("reqUserId", userId);
         return true;
     }
 

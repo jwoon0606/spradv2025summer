@@ -27,7 +27,7 @@ public class TokenFactory {
     }
     public Long validateRefreshTokenKey(String refreshKey){
         Long userId = null;
-        RefreshToken refreshToken = refreshTokenRepository.findByContent(refreshKey);
+        RefreshToken refreshToken = refreshTokenRepository.findByContent(refreshKey).orElse(null);
         if(refreshToken != null){
             userId = validateKey(refreshKey);
         }
