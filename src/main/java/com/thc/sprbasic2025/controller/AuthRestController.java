@@ -1,9 +1,7 @@
 package com.thc.sprbasic2025.controller;
 
-import com.thc.sprbasic2025.constants.AuthConstants;
 import com.thc.sprbasic2025.security.AuthService;
 import com.thc.sprbasic2025.security.ExternalProperties;
-import com.thc.sprbasic2025.util.TokenFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthRestController {
 
-    final AuthService authService;   // 토큰 팩토리 같은 녀석
+    final AuthService authService;
     final ExternalProperties externalProperties;
 
     @PostMapping("")
     public ResponseEntity<Void> getAccessToken(HttpServletRequest request){
         String accessToken =null;
         String prefix = externalProperties.getTokenPrefix();
-
         //리프레시 토큰이 유요한지 확인!
         String refreshToken = request.getHeader("RefreshToken");
         System.out.println("1 refreshToken : " + refreshToken);
@@ -33,7 +30,7 @@ public class AuthRestController {
             System.out.println("2 refreshToken : " + refreshToken);
             accessToken = authService.issueAccessToken(refreshToken);
         }
-        return ResponseEntity.status(HttpStatus.OK).header(AuthConstants.HEADER_STRING,accessToken).build();
+        return ResponseEntity.status(HttpStatus.OK).header(externalProperties.getAccessKey(), prefix + accessToken).build();
     }
 
 }

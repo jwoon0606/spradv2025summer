@@ -1,7 +1,7 @@
 package com.thc.sprbasic2025.controller;
 
-import com.thc.sprbasic2025.dto.UserDto;
 import com.thc.sprbasic2025.dto.DefaultDto;
+import com.thc.sprbasic2025.dto.UserDto;
 import com.thc.sprbasic2025.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +19,11 @@ public class UserRestController {
     }
 
 
-//    @PostMapping("/login")
-//    public ResponseEntity<Void> login(@RequestBody UserDto.LoginReqDto params){
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .header("RefreshToken", userService.login(params).getRefreshToken()).build();
-//    }
+    /*@PostMapping("/login")
+    public ResponseEntity<Void> login(@RequestBody UserDto.LoginReqDto params){
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("RefreshToken", userService.login(params).getRefreshToken()).build();
+    }*/
 
     /*@PostMapping("/login")
     public ResponseEntity<DefaultDto.CreateResDto> login(@RequestBody UserDto.LoginReqDto params){

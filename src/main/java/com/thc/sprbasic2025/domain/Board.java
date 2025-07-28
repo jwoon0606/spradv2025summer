@@ -1,10 +1,9 @@
 package com.thc.sprbasic2025.domain;
 
 import com.thc.sprbasic2025.dto.DefaultDto;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter

@@ -1,8 +1,8 @@
 package com.thc.sprbasic2025.service.impl;
 
 import com.thc.sprbasic2025.domain.Boardimg;
-import com.thc.sprbasic2025.dto.DefaultDto;
 import com.thc.sprbasic2025.dto.BoardimgDto;
+import com.thc.sprbasic2025.dto.DefaultDto;
 import com.thc.sprbasic2025.mapper.BoardimgMapper;
 import com.thc.sprbasic2025.repository.BoardimgRepository;
 import com.thc.sprbasic2025.service.BoardimgService;

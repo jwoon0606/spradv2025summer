@@ -1,11 +1,9 @@
 package com.thc.sprbasic2025.dto;
 
-import com.thc.sprbasic2025.domain.Board;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class DefaultDto {
 
@@ -57,7 +55,7 @@ public class DefaultDto {
         String orderway;
         String orderby;
 
-        public DefaultDto.PagedListResDto init(int listsize){
+        public PagedListResDto init(int listsize){
             Integer perpage = getPerpage(); //한번에 볼 글 갯수
             if(perpage == null || perpage < 1){
                 perpage = 10;
@@ -99,7 +97,7 @@ public class DefaultDto {
             int offset = (callpage - 1) * perpage;
             setOffset(offset);
 
-            return DefaultDto.PagedListResDto.builder()
+            return PagedListResDto.builder()
                     .totalpage(totalpage)
                     .callpage(getCallpage())
                     .perpage(getPerpage())

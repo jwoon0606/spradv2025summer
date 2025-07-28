@@ -1,14 +1,14 @@
 package com.thc.sprbasic2025.service;
 
-import com.thc.sprbasic2025.dto.UserDto;
 import com.thc.sprbasic2025.dto.DefaultDto;
+import com.thc.sprbasic2025.dto.UserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface UserService {
-//    UserDto.LoginResDto login(UserDto.LoginReqDto param);
+    //UserDto.LoginResDto login(UserDto.LoginReqDto param);
     /**/
     DefaultDto.CreateResDto create(UserDto.CreateReqDto param);
     void update(UserDto.UpdateReqDto param);

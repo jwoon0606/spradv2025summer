@@ -1,10 +1,9 @@
 package com.thc.sprbasic2025.controller;
 
-import com.thc.sprbasic2025.dto.PermissionDto;
 import com.thc.sprbasic2025.dto.DefaultDto;
+import com.thc.sprbasic2025.dto.PermissionDto;
 import com.thc.sprbasic2025.security.PrincipalDetails;
 import com.thc.sprbasic2025.service.PermissionService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,7 +50,7 @@ public class PermissionRestController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/detail")
+    @GetMapping("")
     public ResponseEntity<PermissionDto.DetailResDto> detail(DefaultDto.DetailReqDto params, @AuthenticationPrincipal PrincipalDetails principalDetails){
         Long reqUserId = getReqUserId(principalDetails);
         return ResponseEntity.ok(permissionService.detail(params, reqUserId));

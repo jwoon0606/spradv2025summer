@@ -1,21 +1,17 @@
 package com.thc.sprbasic2025.controller;
 
-import com.thc.sprbasic2025.domain.Board;
 import com.thc.sprbasic2025.dto.BoardDto;
 import com.thc.sprbasic2025.dto.DefaultDto;
 import com.thc.sprbasic2025.security.PrincipalDetails;
 import com.thc.sprbasic2025.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/api/board")
 @RestController
@@ -27,12 +23,9 @@ public class BoardRestController {
     }
 
     @PostMapping("")
-    public ResponseEntity<DefaultDto.CreateResDto> create(@RequestBody BoardDto.CreateReqDto params, HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<DefaultDto.CreateResDto> create(@RequestBody BoardDto.CreateReqDto params, HttpServletRequest request){
         Long reqUserId = (Long) request.getAttribute("reqUserId");
         params.setReqUserId(reqUserId);
-//        System.out.println("reqTesting1 : " + request.getAttribute("reqTes" +
-//                "ting1"));
-//        System.out.println("resTesting2 : " + response.getHeader("resTesting2"));
         return ResponseEntity.ok(boardService.create(params));
     }
 
@@ -40,7 +33,6 @@ public class BoardRestController {
     public ResponseEntity<Void> update(@RequestBody BoardDto.UpdateReqDto params, HttpServletRequest request){
         Long reqUserId = (Long) request.getAttribute("reqUserId");
         params.setReqUserId(reqUserId);
-
         boardService.update(params);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -54,6 +46,7 @@ public class BoardRestController {
     public ResponseEntity<BoardDto.DetailResDto> detail(DefaultDto.DetailReqDto params){
         return ResponseEntity.ok(boardService.detail(params));
     }
+
 
     @PreAuthorize("permitAll()")
     //@PreAuthorize("hasRole('USER')")

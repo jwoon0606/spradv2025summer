@@ -12,7 +12,8 @@ import com.thc.sprbasic2025.service.BoardService;
 import com.thc.sprbasic2025.service.BoardimgService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BoardServiceimpl implements BoardService {
@@ -59,6 +60,12 @@ public class BoardServiceimpl implements BoardService {
         if(board == null){
             throw new RuntimeException("no data");
         }
+        System.out.println("board.getUserId() : " + board.getUserId());
+        System.out.println("param.getReqUserId() : " + param.getReqUserId());
+        if(!board.getUserId().equals(param.getReqUserId())){
+            throw new RuntimeException("userId is not equal to reqUserId");
+        }
+
         if(param.getDeleted() != null){ board.setDeleted(param.getDeleted()); }
         if(param.getUserId() != null){ board.setUserId(param.getUserId()); }
         if(param.getTitle() != null){ board.setTitle(param.getTitle()); }
@@ -84,17 +91,13 @@ public class BoardServiceimpl implements BoardService {
                 .build();
         return res;
         */
-        System.out.println("param.getId() : " + param.getId());
         BoardDto.DetailResDto res = boardMapper.detail(param.getId());
-        System.out.println("res : " + res);
         res.setImgs(
             boardimgService.list(BoardimgDto.ListReqDto.builder().deleted(false).boardId(res.getId()).build())
         );
 
         Boardlike boardlike = boardlikeRepository.findByDeletedAndBoardIdAndUserId(false ,res.getId(), param.getUserId());
         res.setLiked(boardlike != null);
-
-
 
         return res;
     }
@@ -103,11 +106,9 @@ public class BoardServiceimpl implements BoardService {
     public List<BoardDto.DetailResDto> list(BoardDto.ListReqDto param) {
         return detailList(boardMapper.list(param));
     }
-
     public List<BoardDto.DetailResDto> detailList(List<BoardDto.DetailResDto> list){
         List<BoardDto.DetailResDto> newList = new ArrayList<>();
         for(BoardDto.DetailResDto each : list){
-            System.out.println(each);
             newList.add(detail(DefaultDto.DetailReqDto.builder().id(each.getId()).build()));
         }
         return newList;
