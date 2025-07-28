@@ -12,16 +12,16 @@ import java.util.Collection;
 @Getter
 @Setter
 public class PrincipalDetails implements UserDetails {
-	
+
 	private final User user;
-	
+
 	public PrincipalDetails(User user) {
 		this.user = user;
 	}
-	
+
 	public User getUser() {
-        return user;
-    }
+		return user;
+	}
 
 	@Override
 	public String getPassword() {
@@ -52,17 +52,15 @@ public class PrincipalDetails implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
-    /**
+
+	/**
 	 *  User Role 파싱하는 함수.
 	 *  @return Collection<? extends GrantedAuthority> authorities
 	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
-		user.getRoleList().forEach(userRoleType->{
-			authorities.add(()->userRoleType.getRoleType().getTypeName());
-		});
+		authorities.add(()->"ROLE_USER");
 		return authorities;
 	}
 

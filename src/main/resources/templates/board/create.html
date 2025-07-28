@@ -78,8 +78,8 @@ create
 <script>
     function createBoard(){
 
-        let userId = localStorage.getItem("userId");
-        if(userId == null){
+        let refreshToken = localStorage.getItem("RefreshToken");
+        if(refreshToken == null){
             alert("로그인 이전입니다. 로그인먼저 해주세요.");
             location.replace("/user/login");
             return false;
